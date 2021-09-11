@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Running on Repl.it
 
-Simply hit run once and start coding. Will hot reload the web view. 
+Simply hit run once and start coding. Will hot reload the web view.
 
 ## Running Scripts
 
