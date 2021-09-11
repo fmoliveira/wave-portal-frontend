@@ -20,14 +20,54 @@
 
 .bio {
 	text-align: center;
-	color: gray;
+	color: var(--text-200);
 	margin-top: 16px;
 }
 
-.waveButton {
+.reactions {
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+@media screen and (min-width: 768px) {
+	.reactions {
+		flex-direction: row;
+	}
+}
+
+.button {
 	cursor: pointer;
 	margin-top: 16px;
-	padding: 8px;
+	padding: 8px 16px;
 	border: 0;
 	border-radius: 5px;
+	background-color: var(--button-bg-color);
+	color: var(--text-100);
+}
+
+.button:hover {
+	-webkit-filter: brightness(80%);
+}
+
+.button:active {
+	transform: translate(1px, 1px);
+}
+
+.buttonWave {
+	--button-bg-color: #fde68a;
+	--text-100: #1f2937;
+}
+
+.buttonCake {
+	--button-bg-color: #f472b6;
+}
+
+.buttonFire {
+	--button-bg-color: #3b82f6;
+}
+
+.buttonEmoji {
+	padding-right: 10px;
 }

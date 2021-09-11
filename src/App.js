@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ethers } from "ethers";
+// import { ethers } from "ethers";
 import "./App.css";
 
 export default function App() {
@@ -8,16 +8,44 @@ export default function App() {
 	return (
 		<div className="mainContainer">
 			<div className="dataContainer">
-				<div className="header">👋 Hey there!</div>
-
-				<div className="bio">
-					I am farza and I worked on self-driving cars so that's pretty cool
-					right? Connect your Ethereum wallet and wave at me!
+				<div className="header">
+					<span role="img" aria-label="Wave">
+						👋
+					</span>
+					Wave at Filipe
 				</div>
 
-				<button className="waveButton" onClick={wave}>
-					Wave at Me
-				</button>
+				<div className="bio">
+					<p>
+						Hi there! I'm Filipe, a Full Stack Dev from Brazil learning about
+						Web3.
+					</p>
+					<p>
+						Connect your wallet to wave at me, send me some cake, or share some
+						hype!
+					</p>
+				</div>
+
+				<section className="reactions">
+					<button className="button buttonWave" onClick={wave}>
+						<span className="buttonEmoji" role="img" aria-label="Wave">
+							👋
+						</span>{" "}
+						Wave at me
+					</button>
+					<button className="button buttonCake" onClick={wave}>
+						<span className="buttonEmoji" role="img" aria-label="Cake">
+							🍰
+						</span>{" "}
+						Send me cake
+					</button>
+					<button className="button buttonFire" onClick={wave}>
+						<span className="buttonEmoji" role="img" aria-label="Fire">
+							🔥
+						</span>{" "}
+						Show some hype
+					</button>
+				</section>
 			</div>
 		</div>
 	);
