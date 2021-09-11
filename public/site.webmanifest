@@ -1,0 +1,14 @@
+{
+    "name": "Wave at Filipe",
+    "short_name": "Wave at Filipe",
+    "icons": [
+        {
+            "src": "/android-chrome-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#1f2937",
+    "background_color": "#1f2937",
+    "display": "standalone"
+}
