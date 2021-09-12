@@ -12,11 +12,17 @@ const Reaction = {
 	Hype: 2,
 };
 
+export const WriteStatus = {
+	None: 0,
+	Request: 1,
+	Pending: 2,
+};
+
 export default function useWallet() {
 	const { ethereum } = window;
 
 	const [loading, setLoading] = useState(true);
-	const [writeLoading, setWriteLoading] = useState(false);
+	const [writeLoading, setWriteLoading] = useState(WriteStatus.None);
 	const [walletInstalled, setInstalled] = useState(false);
 	const [walletConnected, setConnected] = useState(false);
 	const [walletAccount, setAccount] = useState("");
@@ -50,11 +56,14 @@ export default function useWallet() {
 	};
 
 	const waveReaction = async (reaction) => {
-		setWriteLoading(true);
+		setWriteLoading(WriteStatus.Request);
+
 		const transaction = await writeWave(reaction);
+		setWriteLoading(WriteStatus.Pending);
+
 		await transaction.wait();
 		setTotalWaves(await getTotalWaves());
-		setWriteLoading(false);
+		setWriteLoading(WriteStatus.None);
 	};
 
 	const sendWave = () => waveReaction(Reaction.Wave);
