@@ -46,8 +46,11 @@ export default function useWallet() {
 	};
 
 	useEffect(() => {
+		if (isWindowFocused) {
+			// check status whenever the window focus status changes
+		}
 		checkStatus();
-	}, [isWindowFocused]);
+	}, [isWindowFocused, checkStatus]);
 
 	const connectWallet = () => {
 		return ethereum
