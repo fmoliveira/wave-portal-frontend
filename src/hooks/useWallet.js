@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ethers } from "ethers";
 
 import wavePortalAbi from "../contracts/WavePortal.json";
@@ -53,6 +53,7 @@ export default function useWallet() {
 		setWriteLoading(true);
 		const transaction = await writeWave(reaction);
 		await transaction.wait();
+		setTotalWaves(await getTotalWaves());
 		setWriteLoading(false);
 	};
 
