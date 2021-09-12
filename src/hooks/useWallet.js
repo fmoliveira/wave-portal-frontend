@@ -87,6 +87,7 @@ export default function useWallet() {
 				setWriteLoading(WriteStatus.None);
 			})
 			.catch((error) => {
+				window.alert("Failed to write transaction!");
 				console.error(error);
 				setWriteLoading(WriteStatus.None);
 			});
