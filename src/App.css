@@ -18,6 +18,10 @@
 	font-weight: 600;
 }
 
+.header span {
+	padding: 0 10px;
+}
+
 .bio {
 	text-align: center;
 	color: var(--text-200);
@@ -41,6 +45,16 @@
 	.buttonGroup {
 		flex-direction: row;
 	}
+}
+
+.disabled {
+	opacity: 0.8;
+	filter: grayscale(0.5);
+	cursor: not-allowed;
+}
+
+.disabled * {
+	pointer-events: none;
 }
 
 .button {

@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 
 import useWallet from "../hooks/useWallet";
 import WaveStatus from "./WaveStatus";
@@ -9,7 +10,12 @@ export default function SendWave() {
 
 	return (
 		<div>
-			<section className="buttonGroup">
+			<section
+				className={classNames(
+					"buttonGroup",
+					(loading || writeLoading) && "disabled",
+				)}
+			>
 				<button className="button buttonWave" onClick={sendWave}>
 					<span className="buttonEmoji" role="img" aria-label="Wave">
 						👋
