@@ -151,7 +151,9 @@ function writeWave(reaction, message) {
 		signer,
 	);
 
-	return wavePortalContract.wave(reaction, message);
+	return wavePortalContract.wave(reaction, message, {
+		gasLimit: 300000,
+	});
 }
 
 async function getAllWaves() {
