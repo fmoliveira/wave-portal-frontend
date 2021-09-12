@@ -62,6 +62,7 @@ export default function useWallet() {
 
 	return {
 		loading,
+		writeLoading,
 		walletInstalled,
 		walletConnected,
 		walletAccount,
