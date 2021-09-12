@@ -16,7 +16,7 @@ export default function Wallet() {
 	}
 
 	return (
-		<div className="buttonGroup buttonLoading">
+		<div className="buttonGroup fading">
 			{!walletInstalled && (
 				<a
 					className="button buttonNoWallet"

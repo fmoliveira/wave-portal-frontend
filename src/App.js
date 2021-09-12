@@ -5,8 +5,7 @@ import useWallet from "./hooks/useWallet";
 import "./App.css";
 
 export default function App() {
-	const { loading, totalWaves } = useWallet();
-	const wave = () => {};
+	const { loading, totalWaves, sendWave, sendCake, sendHype } = useWallet();
 
 	return (
 		<div className="mainContainer">
@@ -32,19 +31,19 @@ export default function App() {
 				</div>
 
 				<section className="buttonGroup">
-					<button className="button buttonWave" onClick={wave}>
+					<button className="button buttonWave" onClick={sendWave}>
 						<span className="buttonEmoji" role="img" aria-label="Wave">
 							👋
 						</span>{" "}
 						Wave at me
 					</button>
-					<button className="button buttonCake" onClick={wave}>
+					<button className="button buttonCake" onClick={sendCake}>
 						<span className="buttonEmoji" role="img" aria-label="Cake">
 							🍰
 						</span>{" "}
 						Send me cake
 					</button>
-					<button className="button buttonFire" onClick={wave}>
+					<button className="button buttonFire" onClick={sendHype}>
 						<span className="buttonEmoji" role="img" aria-label="Fire">
 							🔥
 						</span>{" "}
@@ -53,7 +52,9 @@ export default function App() {
 				</section>
 
 				{!loading && (
-					<div className="totalWaves">I've been waved {totalWaves} times</div>
+					<div className="totalWaves fading">
+						I've been waved {totalWaves} times
+					</div>
 				)}
 			</div>
 		</div>

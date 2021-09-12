@@ -6,10 +6,17 @@ import useWindowFocus from "./useWindowFocus";
 
 const RINKEBY_CONTRACT_ADDRESS = "0xd5416b962b52f8966D7D62ed2956A3EA0B83df59";
 
+const Reaction = {
+	Wave: 0,
+	Cake: 1,
+	Hype: 2,
+};
+
 export default function useWallet() {
 	const { ethereum } = window;
 
 	const [loading, setLoading] = useState(true);
+	const [writeLoading, setWriteLoading] = useState(false);
 	const [walletInstalled, setInstalled] = useState(false);
 	const [walletConnected, setConnected] = useState(false);
 	const [walletAccount, setAccount] = useState("");
@@ -42,6 +49,17 @@ export default function useWallet() {
 			});
 	};
 
+	const waveReaction = async (reaction) => {
+		setWriteLoading(true);
+		const transaction = await writeWave(reaction);
+		await transaction.wait();
+		setWriteLoading(false);
+	};
+
+	const sendWave = () => waveReaction(Reaction.Wave);
+	const sendCake = () => waveReaction(Reaction.Cake);
+	const sendHype = () => waveReaction(Reaction.Hype);
+
 	return {
 		loading,
 		walletInstalled,
@@ -50,6 +68,9 @@ export default function useWallet() {
 		walletError,
 		connectWallet,
 		totalWaves,
+		sendWave,
+		sendCake,
+		sendHype,
 	};
 }
 
@@ -80,4 +101,16 @@ async function getTotalWaves() {
 
 	const totalWaves = await wavePortalContract.getTotalWaves();
 	return totalWaves.toString();
+}
+
+function writeWave(reaction) {
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+	const signer = provider.getSigner();
+	const wavePortalContract = new ethers.Contract(
+		RINKEBY_CONTRACT_ADDRESS,
+		wavePortalAbi.abi,
+		signer,
+	);
+
+	return wavePortalContract.wave(reaction);
 }

@@ -33,7 +33,7 @@
 	justify-content: space-around;
 }
 
-.buttonLoading {
+.fading {
 	animation: fadein 1s;
 }
 
