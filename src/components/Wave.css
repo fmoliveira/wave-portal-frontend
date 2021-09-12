@@ -69,4 +69,12 @@ dd {
 		gap: 5px 10px;
 		grid-template-columns: auto 1fr;
 	}
+
+	.body dt {
+		font-size: 0.95rem;
+	}
+
+	.body dd {
+		font-size: 0.9rem;
+	}
 }
