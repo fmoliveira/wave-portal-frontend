@@ -7,6 +7,7 @@ import "./SendWave.css";
 import { WriteStatus } from "../hooks/useWallet";
 
 export default function SendWave({
+	walletInstalled,
 	loading,
 	writeLoading,
 	totalWaves,
@@ -16,7 +17,8 @@ export default function SendWave({
 }) {
 	const [message, setMessage] = useState("");
 	const disableInput = Boolean(writeLoading);
-	const disableButtons = loading || writeLoading || message.length === 0;
+	const disableButtons =
+		!walletInstalled || loading || writeLoading || message.length === 0;
 
 	useEffect(() => {
 		if (writeLoading === WriteStatus.None) {

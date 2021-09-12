@@ -36,6 +36,7 @@ export default function App() {
 				/>
 				<Bio />
 				<SendWave
+					walletInstalled={walletInstalled}
 					loading={loading}
 					writeLoading={writeLoading}
 					totalWaves={totalWaves}
