@@ -57,9 +57,14 @@ export default function useWallet() {
 	};
 
 	const waveReaction = async (reaction) => {
+		if (!walletInstalled) {
+			return;
+		}
+
 		if (!walletConnected) {
 			setWriteLoading(WriteStatus.Connect);
 			await connectWallet();
+			setConnected(await getWalletConnected());
 		}
 
 		setWriteLoading(WriteStatus.Request);
