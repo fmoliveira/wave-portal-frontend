@@ -4,6 +4,7 @@ import { WriteStatus } from "../hooks/useWallet";
 import Spinner from "./Spinner";
 
 const WriteLoadingMessage = {
+	[WriteStatus.Connect]: "Please connect your wallet to proceed...",
 	[WriteStatus.Request]: "Check your wallet for the transaction...",
 	[WriteStatus.Pending]: "Wave transaction in progress...",
 };

@@ -14,8 +14,9 @@ const Reaction = {
 
 export const WriteStatus = {
 	None: 0,
-	Request: 1,
-	Pending: 2,
+	Connect: 1,
+	Request: 2,
+	Pending: 3,
 };
 
 export default function useWallet() {
@@ -44,7 +45,7 @@ export default function useWallet() {
 	}, [isWindowFocused]);
 
 	const connectWallet = () => {
-		ethereum
+		return ethereum
 			.request({ method: "eth_requestAccounts" })
 			.then((accountList) => {
 				const [firstAccount] = accountList;
@@ -56,6 +57,11 @@ export default function useWallet() {
 	};
 
 	const waveReaction = async (reaction) => {
+		if (!walletConnected) {
+			setWriteLoading(WriteStatus.Connect);
+			await connectWallet();
+		}
+
 		setWriteLoading(WriteStatus.Request);
 
 		writeWave(reaction)
