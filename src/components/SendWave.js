@@ -42,19 +42,19 @@ export default function SendWave({
 				<button className="button buttonWave" onClick={() => sendWave(message)}>
 					<span className="buttonEmoji" role="img" aria-label="Wave">
 						👋
-					</span>{" "}
+					</span>
 					Wave at me
 				</button>
 				<button className="button buttonCake" onClick={() => sendCake(message)}>
 					<span className="buttonEmoji" role="img" aria-label="Cake">
 						🍰
-					</span>{" "}
+					</span>
 					Send me cake
 				</button>
 				<button className="button buttonFire" onClick={() => sendHype(message)}>
 					<span className="buttonEmoji" role="img" aria-label="Fire">
 						🔥
-					</span>{" "}
+					</span>
 					Share some hype
 				</button>
 			</section>
