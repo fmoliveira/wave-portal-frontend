@@ -41,16 +41,16 @@ export default function useWallet() {
 		runUpdates();
 	}, [setTotalWaves, setWaveList]);
 
-	const addNewWaveToList = useCallback(
-		(newWave) => {
-			setWaveList([newWave, ...waveList]);
-		},
-		[waveList],
-	);
+	// const addNewWaveToList = useCallback(
+	// 	(newWave) => {
+	// 		setWaveList([newWave, ...waveList]);
+	// 	},
+	// 	[waveList],
+	// );
 
 	useEffect(() => {
 		subscribeToWaveEvents((newWave) => {
-			addNewWaveToList(newWave);
+			updateWaves();
 		});
 		// SUBSCRICE ONCE when mounting the component
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -167,7 +167,7 @@ function writeWave(reaction, message) {
 	);
 
 	return wavePortalContract.wave(reaction, message, {
-		gasLimit: 300000,
+		gasLimit: 400000,
 	});
 }
 
