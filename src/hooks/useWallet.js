@@ -58,12 +58,17 @@ export default function useWallet() {
 	const waveReaction = async (reaction) => {
 		setWriteLoading(WriteStatus.Request);
 
-		const transaction = await writeWave(reaction);
-		setWriteLoading(WriteStatus.Pending);
+		writeWave(reaction)
+			.then(async (transaction) => {
+				setWriteLoading(WriteStatus.Pending);
 
-		await transaction.wait();
-		setTotalWaves(await getTotalWaves());
-		setWriteLoading(WriteStatus.None);
+				await transaction.wait();
+				setTotalWaves(await getTotalWaves());
+				setWriteLoading(WriteStatus.None);
+			})
+			.catch(() => {
+				setWriteLoading(WriteStatus.None);
+			});
 	};
 
 	const sendWave = () => waveReaction(Reaction.Wave);
