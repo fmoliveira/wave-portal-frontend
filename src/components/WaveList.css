@@ -1,0 +1,6 @@
+.waveList {
+	margin: 35px 0;
+	display: flex;
+	gap: 32px;
+	flex-direction: column;
+}

@@ -6,7 +6,7 @@ import useWindowFocus from "./useWindowFocus";
 
 const RINKEBY_CONTRACT_ADDRESS = "0x258e9Ce77847fcf140eB01bD0Dd88fE7FFBC0437";
 
-const Reaction = {
+export const Reaction = {
 	Wave: 0,
 	Cake: 1,
 	Hype: 2,
@@ -28,6 +28,7 @@ export default function useWallet() {
 	const [walletConnected, setConnected] = useState(false);
 	const [walletAccount, setAccount] = useState("");
 	const [walletError, setWalletError] = useState(null);
+	const [waveList, setWaveList] = useState([]);
 	const [totalWaves, setTotalWaves] = useState(null);
 
 	const isWindowFocused = useWindowFocus();
@@ -35,8 +36,13 @@ export default function useWallet() {
 	const checkStatus = async () => {
 		setInstalled(getWalletInstalled());
 		setConnected(await getWalletConnected());
-		setTotalWaves(await getTotalWaves());
+		updateWaves();
 		setLoading(false);
+	};
+
+	const updateWaves = async () => {
+		setTotalWaves(await getTotalWaves());
+		setWaveList(await getAllWaves());
 	};
 
 	useEffect(() => {
@@ -72,7 +78,7 @@ export default function useWallet() {
 				setWriteLoading(WriteStatus.Pending);
 
 				await transaction.wait();
-				setTotalWaves(await getTotalWaves());
+				updateWaves();
 				setWriteLoading(WriteStatus.None);
 			})
 			.catch((error) => {
@@ -93,6 +99,7 @@ export default function useWallet() {
 		walletAccount,
 		walletError,
 		connectWallet,
+		waveList,
 		totalWaves,
 		sendWave,
 		sendCake,
@@ -139,4 +146,28 @@ function writeWave(reaction, message) {
 	);
 
 	return wavePortalContract.wave(reaction, message);
+}
+
+async function getAllWaves() {
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+	const wavePortalContract = new ethers.Contract(
+		RINKEBY_CONTRACT_ADDRESS,
+		wavePortalAbi.abi,
+		provider,
+	);
+
+	const allWaves = await wavePortalContract.getAllWaves();
+
+	if (!allWaves) {
+		return [];
+	}
+
+	const normalizeWave = (wave) => ({
+		reaction: wave.reaction,
+		message: wave.message,
+		waver: wave.waver,
+		timestamp: new Date(wave.timestamp * 1000),
+	});
+
+	return allWaves.map(normalizeWave).sort((a, b) => b.timestamp - a.timestamp);
 }

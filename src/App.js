@@ -8,6 +8,7 @@ import Wallet from "./components/Wallet";
 import useWallet from "./hooks/useWallet";
 
 import "./App.css";
+import WaveList from "./components/WaveList";
 
 export default function App() {
 	const {
@@ -16,6 +17,7 @@ export default function App() {
 		connectWallet,
 		loading,
 		writeLoading,
+		waveList,
 		totalWaves,
 		sendWave,
 		sendCake,
@@ -41,6 +43,7 @@ export default function App() {
 					sendCake={sendCake}
 					sendHype={sendHype}
 				/>
+				<WaveList waveList={waveList} />
 			</div>
 		</div>
 	);

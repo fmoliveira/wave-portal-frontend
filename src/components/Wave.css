@@ -1,0 +1,43 @@
+.wave {
+	display: flex;
+	gap: 20px;
+	padding: 10px;
+	padding-bottom: 15px;
+	justify-content: flex-start;
+	background-color: rgba(55, 65, 81, 0.8);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.reaction {
+	padding: 0 10px;
+	font-size: 2rem;
+}
+
+.body {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.body dl {
+	display: grid;
+	gap: 5px 10px;
+	grid-template-columns: auto 1fr;
+}
+
+.body dt {
+	color: #6ee7b7;
+	font-weight: 500;
+}
+
+dl,
+dt,
+dd {
+	margin: 0;
+}
+
+.message {
+	margin-top: 10px;
+}
