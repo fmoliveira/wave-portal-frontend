@@ -96,6 +96,11 @@
 	padding-right: 10px;
 }
 
+.totalWaves {
+	margin: 20px 0;
+	text-align: center;
+}
+
 @keyframes fadein {
 	from {
 		opacity: 0;

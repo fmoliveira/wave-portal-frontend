@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
-// import { ethers } from "ethers";
+import { useEffect, useState } from "react";
+import { ethers } from "ethers";
 
+import wavePortalAbi from "../contracts/WavePortal.json";
 import useWindowFocus from "./useWindowFocus";
 
-const RINKEBY_CONTRACT_ID = "0xd5416b962b52f8966D7D62ed2956A3EA0B83df59";
+const RINKEBY_CONTRACT_ADDRESS = "0xd5416b962b52f8966D7D62ed2956A3EA0B83df59";
 
 export default function useWallet() {
 	const { ethereum } = window;
@@ -13,6 +14,7 @@ export default function useWallet() {
 	const [walletConnected, setConnected] = useState(false);
 	const [walletAccount, setAccount] = useState("");
 	const [walletError, setWalletError] = useState(null);
+	const [totalWaves, setTotalWaves] = useState(null);
 
 	const isWindowFocused = useWindowFocus();
 
@@ -21,6 +23,7 @@ export default function useWallet() {
 			const checkStatus = async () => {
 				setInstalled(getWalletInstalled());
 				setConnected(await getWalletConnected());
+				setTotalWaves(await getTotalWaves());
 				setLoading(false);
 			};
 			checkStatus();
@@ -43,8 +46,10 @@ export default function useWallet() {
 		loading,
 		walletInstalled,
 		walletConnected,
+		walletAccount,
 		walletError,
 		connectWallet,
+		totalWaves,
 	};
 }
 
@@ -59,4 +64,20 @@ async function getWalletConnected() {
 
 	const accountList = await window.ethereum.request({ method: "eth_accounts" });
 	return accountList.length !== 0;
+}
+
+async function getTotalWaves() {
+	if (!window.ethereum) {
+		return;
+	}
+
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+	const wavePortalContract = new ethers.Contract(
+		RINKEBY_CONTRACT_ADDRESS,
+		wavePortalAbi.abi,
+		provider,
+	);
+
+	const totalWaves = await wavePortalContract.getTotalWaves();
+	return totalWaves.toString();
 }

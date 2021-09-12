@@ -1,10 +1,11 @@
 import * as React from "react";
 
+import Wallet from "./components/Wallet";
 import useWallet from "./hooks/useWallet";
 import "./App.css";
-import Wallet from "./components/Wallet";
 
 export default function App() {
+	const { loading, totalWaves } = useWallet();
 	const wave = () => {};
 
 	return (
@@ -50,6 +51,10 @@ export default function App() {
 						Share some hype
 					</button>
 				</section>
+
+				{!loading && (
+					<div className="totalWaves">I've been waved {totalWaves} times</div>
+				)}
 			</div>
 		</div>
 	);
