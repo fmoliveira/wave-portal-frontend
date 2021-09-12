@@ -47,7 +47,7 @@ export default function App() {
 						<span className="buttonEmoji" role="img" aria-label="Fire">
 							🔥
 						</span>{" "}
-						Show some hype
+						Share some hype
 					</button>
 				</section>
 			</div>
