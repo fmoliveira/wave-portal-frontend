@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
 import WaveStatus from "./WaveStatus";
 
 import "./SendWave.css";
+import { WriteStatus } from "../hooks/useWallet";
 
 export default function SendWave({
 	loading,
@@ -14,6 +15,12 @@ export default function SendWave({
 	sendHype,
 }) {
 	const [message, setMessage] = useState("");
+
+	useEffect(() => {
+		if (writeLoading === WriteStatus.None) {
+			setMessage("");
+		}
+	}, [writeLoading]);
 
 	return (
 		<div>
