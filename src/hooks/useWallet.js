@@ -41,6 +41,21 @@ export default function useWallet() {
 		runUpdates();
 	}, [setTotalWaves, setWaveList]);
 
+	const addNewWaveToList = useCallback(
+		(newWave) => {
+			setWaveList([newWave, ...waveList]);
+		},
+		[waveList],
+	);
+
+	useEffect(() => {
+		subscribeToWaveEvents((newWave) => {
+			addNewWaveToList(newWave);
+		});
+		// SUBSCRICE ONCE when mounting the component
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	useEffect(() => {
 		if (isWindowFocused) {
 			// check status whenever the window focus status changes
@@ -157,6 +172,10 @@ function writeWave(reaction, message) {
 }
 
 async function getAllWaves() {
+	if (!window.ethereum) {
+		return;
+	}
+
 	const provider = new ethers.providers.Web3Provider(window.ethereum);
 	const wavePortalContract = new ethers.Contract(
 		RINKEBY_CONTRACT_ADDRESS,
@@ -178,4 +197,21 @@ async function getAllWaves() {
 	});
 
 	return allWaves.map(normalizeWave).sort((a, b) => b.timestamp - a.timestamp);
+}
+
+function subscribeToWaveEvents(callback) {
+	if (!window.ethereum) {
+		return;
+	}
+
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+	const wavePortalContract = new ethers.Contract(
+		RINKEBY_CONTRACT_ADDRESS,
+		wavePortalAbi.abi,
+		provider,
+	);
+
+	wavePortalContract.on("NewWave", (reaction, message, waver, timestamp) => {
+		callback({ reaction, message, waver, timestamp });
+	});
 }
