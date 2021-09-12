@@ -2,7 +2,7 @@ import * as React from "react";
 // import { ethers } from "ethers";
 import "./App.css";
 
-const RINKEBY_CONTRACT_ID = "0xf22000c23c1be76EC0c012a97F7F221E4970fd43";
+const RINKEBY_CONTRACT_ID = "0xd5416b962b52f8966D7D62ed2956A3EA0B83df59";
 
 export default function App() {
 	const wave = () => {};
