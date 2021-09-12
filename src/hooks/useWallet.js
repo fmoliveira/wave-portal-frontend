@@ -32,14 +32,19 @@ export default function useWallet() {
 
 	const isWindowFocused = useWindowFocus();
 
+	const checkStatus = async () => {
+		setInstalled(getWalletInstalled());
+		setConnected(await getWalletConnected());
+		setTotalWaves(await getTotalWaves());
+		setLoading(false);
+	};
+
+	useEffect(() => {
+		checkStatus();
+	}, []);
+
 	useEffect(() => {
 		if (isWindowFocused) {
-			const checkStatus = async () => {
-				setInstalled(getWalletInstalled());
-				setConnected(await getWalletConnected());
-				setTotalWaves(await getTotalWaves());
-				setLoading(false);
-			};
 			checkStatus();
 		}
 	}, [isWindowFocused]);
