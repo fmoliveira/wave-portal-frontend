@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	margin-top: 64px;
+	margin-top: 20px;
 }
 
 .dataContainer {
@@ -10,6 +10,7 @@
 	flex-direction: column;
 	justify-content: center;
 	max-width: 600px;
+	margin: 0 20px;
 }
 
 .header {
@@ -30,7 +31,6 @@
 }
 
 .buttonGroup {
-	margin: 10px;
 	min-height: 34px;
 	display: flex;
 	gap: 15px;
@@ -45,12 +45,6 @@
 
 .fading {
 	animation: fadein 1s;
-}
-
-@media screen and (min-width: 768px) {
-	.buttonGroup {
-		flex-direction: row;
-	}
 }
 
 .disabled {
@@ -127,5 +121,15 @@
 	}
 	to {
 		opacity: 1;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.mainContainer {
+		margin-top: 64px;
+	}
+
+	.buttonGroup {
+		flex-direction: row;
 	}
 }

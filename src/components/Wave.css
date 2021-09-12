@@ -1,5 +1,7 @@
 .wave {
+	position: relative;
 	display: flex;
+	flex-direction: column;
 	gap: 20px;
 	padding: 15px 10px;
 	justify-content: flex-start;
@@ -9,8 +11,11 @@
 }
 
 .reaction {
+	position: absolute;
+	top: 50px;
+	right: 10px;
 	padding: 0 10px;
-	font-size: 2rem;
+	font-size: 1.5rem;
 }
 
 .body {
@@ -21,14 +26,22 @@
 }
 
 .body dl {
-	display: grid;
-	gap: 5px 10px;
-	grid-template-columns: auto 1fr;
+	display: flex;
+	flex-direction: column;
 }
 
 .body dt {
 	color: #6ee7b7;
 	font-weight: 500;
+	font-size: 0.9rem;
+}
+
+.body dd {
+	font-size: 0.85rem;
+	max-width: calc(100vw - 40px);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 dl,
@@ -39,4 +52,21 @@ dd {
 
 .message {
 	margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+	.wave {
+		flex-direction: row;
+	}
+
+	.reaction {
+		position: static;
+		font-size: 2rem;
+	}
+
+	.body dl {
+		display: grid;
+		gap: 5px 10px;
+		grid-template-columns: auto 1fr;
+	}
 }
