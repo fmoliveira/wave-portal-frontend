@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import wavePortalAbi from "../contracts/WavePortal.json";
 import useWindowFocus from "./useWindowFocus";
 
-const RINKEBY_CONTRACT_ADDRESS = "0xb40E0429BfF8A46bCC903B4A93d1F290f22E1782";
+const RINKEBY_CONTRACT_ADDRESS = "0x933B92cB1f357290cC9d97101c2C8be99573E79e";
 
 export const Reaction = {
 	Wave: 0,
