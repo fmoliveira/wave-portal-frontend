@@ -15,6 +15,8 @@ export default function SendWave({
 	sendHype,
 }) {
 	const [message, setMessage] = useState("");
+	const disableInput = Boolean(writeLoading);
+	const disableButtons = loading || writeLoading || message.length === 0;
 
 	useEffect(() => {
 		if (writeLoading === WriteStatus.None) {
@@ -28,16 +30,14 @@ export default function SendWave({
 				<label htmlFor="message">Write your message below:</label>
 				<textarea
 					id="message"
-					className="textBox"
+					className={classNames("textBox")}
+					disabled={disableInput}
 					value={message}
 					onChange={(ev) => setMessage(ev.target.value)}
 				/>
 			</div>
 			<section
-				className={classNames(
-					"buttonGroup",
-					(loading || writeLoading || message.length === 0) && "disabled",
-				)}
+				className={classNames("buttonGroup", disableButtons && "disabled")}
 			>
 				<button className="button buttonWave" onClick={() => sendWave(message)}>
 					<span className="buttonEmoji" role="img" aria-label="Wave">
