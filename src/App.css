@@ -33,6 +33,7 @@
 	margin: 10px;
 	min-height: 34px;
 	display: flex;
+	gap: 15px;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
