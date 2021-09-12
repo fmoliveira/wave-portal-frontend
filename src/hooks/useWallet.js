@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ethers } from "ethers";
 
 import wavePortalAbi from "../contracts/WavePortal.json";
@@ -33,24 +33,26 @@ export default function useWallet() {
 
 	const isWindowFocused = useWindowFocus();
 
-	const checkStatus = async () => {
-		setInstalled(getWalletInstalled());
-		setConnected(await getWalletConnected());
-		updateWaves();
-		setLoading(false);
-	};
-
-	const updateWaves = async () => {
-		setTotalWaves(await getTotalWaves());
-		setWaveList(await getAllWaves());
-	};
+	const updateWaves = useCallback(() => {
+		const runUpdates = async () => {
+			setTotalWaves(await getTotalWaves());
+			setWaveList(await getAllWaves());
+		};
+		runUpdates();
+	}, [setTotalWaves, setWaveList]);
 
 	useEffect(() => {
 		if (isWindowFocused) {
 			// check status whenever the window focus status changes
 		}
-		checkStatus();
-	}, [isWindowFocused, checkStatus]);
+		const runUpdates = async () => {
+			setInstalled(getWalletInstalled());
+			setConnected(await getWalletConnected());
+			updateWaves();
+			setLoading(false);
+		};
+		runUpdates();
+	}, [isWindowFocused, setInstalled, setConnected, updateWaves, setLoading]);
 
 	const connectWallet = () => {
 		return ethereum
