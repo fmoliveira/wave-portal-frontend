@@ -1,8 +1,8 @@
 import * as React from "react";
-// import { ethers } from "ethers";
-import "./App.css";
 
-const RINKEBY_CONTRACT_ID = "0xd5416b962b52f8966D7D62ed2956A3EA0B83df59";
+import useWallet from "./hooks/useWallet";
+import "./App.css";
+import Wallet from "./components/Wallet";
 
 export default function App() {
 	const wave = () => {};
@@ -17,6 +17,8 @@ export default function App() {
 					Wave at Filipe
 				</div>
 
+				<Wallet />
+
 				<div className="bio">
 					<p>
 						Hi there! I'm Filipe, a Full Stack Dev from Brazil learning about
@@ -28,7 +30,7 @@ export default function App() {
 					</p>
 				</div>
 
-				<section className="reactions">
+				<section className="buttonGroup">
 					<button className="button buttonWave" onClick={wave}>
 						<span className="buttonEmoji" role="img" aria-label="Wave">
 							👋
