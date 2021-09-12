@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import wavePortalAbi from "../contracts/WavePortal.json";
 import useWindowFocus from "./useWindowFocus";
 
-const RINKEBY_CONTRACT_ADDRESS = "0xd5416b962b52f8966D7D62ed2956A3EA0B83df59";
+const RINKEBY_CONTRACT_ADDRESS = "0x258e9Ce77847fcf140eB01bD0Dd88fE7FFBC0437";
 
 const Reaction = {
 	Wave: 0,
@@ -41,12 +41,6 @@ export default function useWallet() {
 
 	useEffect(() => {
 		checkStatus();
-	}, []);
-
-	useEffect(() => {
-		if (isWindowFocused) {
-			checkStatus();
-		}
 	}, [isWindowFocused]);
 
 	const connectWallet = () => {
@@ -61,7 +55,7 @@ export default function useWallet() {
 			});
 	};
 
-	const waveReaction = async (reaction) => {
+	const waveReaction = async (reaction, message) => {
 		if (!walletInstalled) {
 			return;
 		}
@@ -74,7 +68,7 @@ export default function useWallet() {
 
 		setWriteLoading(WriteStatus.Request);
 
-		writeWave(reaction)
+		writeWave(reaction, message)
 			.then(async (transaction) => {
 				setWriteLoading(WriteStatus.Pending);
 
@@ -87,9 +81,9 @@ export default function useWallet() {
 			});
 	};
 
-	const sendWave = () => waveReaction(Reaction.Wave);
-	const sendCake = () => waveReaction(Reaction.Cake);
-	const sendHype = () => waveReaction(Reaction.Hype);
+	const sendWave = (message) => waveReaction(Reaction.Wave, message);
+	const sendCake = (message) => waveReaction(Reaction.Cake, message);
+	const sendHype = (message) => waveReaction(Reaction.Hype, message);
 
 	return {
 		loading,

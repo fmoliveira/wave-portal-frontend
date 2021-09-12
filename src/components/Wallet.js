@@ -11,7 +11,7 @@ export default function Wallet() {
 	}
 
 	return (
-		<div className="buttonGroup fading">
+		<div className="buttonGroup justifyCenter fading">
 			{!walletInstalled && (
 				<a
 					className="button buttonNoWallet"
