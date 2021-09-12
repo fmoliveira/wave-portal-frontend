@@ -1,11 +1,11 @@
 import React from "react";
 
-import useWallet from "../hooks/useWallet";
-
-export default function Wallet() {
-	const { loading, walletInstalled, walletConnected, connectWallet } =
-		useWallet();
-
+export default function Wallet({
+	loading,
+	walletInstalled,
+	walletConnected,
+	connectWallet,
+}) {
 	if (loading) {
 		return <div className="buttonGroup" />;
 	}

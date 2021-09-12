@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
-import useWallet from "../hooks/useWallet";
 import WaveStatus from "./WaveStatus";
 
 import "./SendWave.css";
 
-export default function SendWave() {
+export default function SendWave({
+	loading,
+	writeLoading,
+	totalWaves,
+	sendWave,
+	sendCake,
+	sendHype,
+}) {
 	const [message, setMessage] = useState("");
-	const { loading, writeLoading, totalWaves, sendWave, sendCake, sendHype } =
-		useWallet();
 
 	return (
 		<div>
