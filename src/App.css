@@ -32,7 +32,7 @@
 
 .buttonGroup {
 	margin: 10px 0;
-	min-height: 34px;
+	min-height: 46px;
 	display: flex;
 	gap: 15px;
 	flex-direction: column;
