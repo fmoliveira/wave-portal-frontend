@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ethers } from "ethers";
 
 import wavePortalAbi from "../contracts/WavePortal.json";
@@ -19,6 +19,14 @@ export const WriteStatus = {
 	Pending: 3,
 };
 
+const EvmName = {
+	1: "Mainnet",
+};
+
+const EvmChain = {
+	Rinkeby: 4,
+};
+
 export default function useWallet() {
 	const { ethereum } = window;
 
@@ -26,10 +34,18 @@ export default function useWallet() {
 	const [writeLoading, setWriteLoading] = useState(WriteStatus.None);
 	const [walletInstalled, setInstalled] = useState(false);
 	const [walletConnected, setConnected] = useState(false);
+	const [walletNetwork, setNetwork] = useState(null);
 	const [walletAccount, setAccount] = useState("");
 	const [walletError, setWalletError] = useState(null);
 	const [waveList, setWaveList] = useState([]);
 	const [totalWaves, setTotalWaves] = useState(null);
+	const networkName = useMemo(() => {
+		if (!walletNetwork) {
+			return "";
+		}
+		return EvmName[walletNetwork?.chainId] || walletNetwork.name;
+	}, [walletNetwork]);
+	const isRinkeby = walletNetwork?.chainId === EvmChain.Rinkeby;
 
 	const isWindowFocused = useWindowFocus();
 
@@ -63,6 +79,7 @@ export default function useWallet() {
 		const runUpdates = async () => {
 			setInstalled(getWalletInstalled());
 			setConnected(await getWalletConnected());
+			setNetwork(await getNetwork());
 			updateWaves();
 			setLoading(false);
 		};
@@ -120,6 +137,8 @@ export default function useWallet() {
 		walletAccount,
 		walletError,
 		connectWallet,
+		networkName,
+		isRinkeby,
 		waveList,
 		totalWaves,
 		sendWave,
@@ -138,7 +157,17 @@ async function getWalletConnected() {
 	}
 
 	const accountList = await window.ethereum.request({ method: "eth_accounts" });
+	console.log({ accountList });
 	return accountList.length !== 0;
+}
+
+function getNetwork() {
+	if (!window.ethereum) {
+		return false;
+	}
+
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+	return provider.getNetwork();
 }
 
 async function getTotalWaves() {

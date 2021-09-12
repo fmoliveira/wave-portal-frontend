@@ -8,6 +8,8 @@ import { WriteStatus } from "../hooks/useWallet";
 
 export default function SendWave({
 	walletInstalled,
+	walletConnected,
+	isRinkeby,
 	loading,
 	writeLoading,
 	totalWaves,
@@ -18,7 +20,12 @@ export default function SendWave({
 	const [message, setMessage] = useState("");
 	const disableInput = Boolean(writeLoading);
 	const disableButtons =
-		!walletInstalled || loading || writeLoading || message.length === 0;
+		!walletInstalled ||
+		!walletConnected ||
+		!isRinkeby ||
+		loading ||
+		writeLoading ||
+		message.length === 0;
 
 	useEffect(() => {
 		if (writeLoading === WriteStatus.None) {

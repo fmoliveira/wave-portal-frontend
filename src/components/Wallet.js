@@ -1,9 +1,12 @@
 import React from "react";
+import classNames from "classnames";
 
 export default function Wallet({
 	loading,
 	walletInstalled,
 	walletConnected,
+	networkName,
+	isRinkeby,
 	connectWallet,
 }) {
 	if (loading) {
@@ -29,8 +32,23 @@ export default function Wallet({
 			)}
 			{walletConnected && (
 				<div>
-					<span className="dotConnected" />
-					Wallet Connected
+					<div>
+						<span className="dotConnected" />
+						Wallet Connected
+					</div>
+					<div
+						class={classNames(
+							"network",
+							isRinkeby ? "networkValid" : "networkInvalid",
+						)}
+					>
+						Network: <span className="networkName">{networkName}</span>
+					</div>
+					{!isRinkeby && (
+						<div className="network networkInvalid">
+							Please switch to Rinkeby
+						</div>
+					)}
 				</div>
 			)}
 		</div>

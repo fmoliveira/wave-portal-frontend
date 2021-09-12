@@ -14,6 +14,8 @@ export default function App() {
 	const {
 		walletInstalled,
 		walletConnected,
+		networkName,
+		isRinkeby,
 		connectWallet,
 		loading,
 		writeLoading,
@@ -32,11 +34,15 @@ export default function App() {
 					loading={loading}
 					walletInstalled={walletInstalled}
 					walletConnected={walletConnected}
+					isRinkeby={isRinkeby}
+					networkName={networkName}
 					connectWallet={connectWallet}
 				/>
 				<Bio />
 				<SendWave
 					walletInstalled={walletInstalled}
+					walletConnected={walletConnected}
+					isRinkeby={isRinkeby}
 					loading={loading}
 					writeLoading={writeLoading}
 					totalWaves={totalWaves}
