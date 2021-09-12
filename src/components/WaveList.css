@@ -3,4 +3,17 @@
 	display: flex;
 	gap: 32px;
 	flex-direction: column;
+	animation: fadeslow 3s;
+}
+
+@keyframes fadeslow {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
