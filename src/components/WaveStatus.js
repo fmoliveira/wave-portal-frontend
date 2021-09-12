@@ -1,6 +1,7 @@
 import React from "react";
 
 import { WriteStatus } from "../hooks/useWallet";
+import Spinner from "./Spinner";
 
 const WriteLoadingMessage = {
 	[WriteStatus.Request]: "Check your wallet for the transaction...",
@@ -14,7 +15,10 @@ export default function WaveStatus({ loading, writeLoading, totalWaves }) {
 
 	if (writeLoading) {
 		return (
-			<div className="waveStatus">{WriteLoadingMessage[writeLoading]}</div>
+			<div className="waveStatus">
+				<p>{WriteLoadingMessage[writeLoading]}</p>
+				<Spinner />
+			</div>
 		);
 	}
 
