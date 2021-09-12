@@ -65,7 +65,6 @@ export default function useWallet() {
 			await connectWallet();
 			setConnected(await getWalletConnected());
 		}
-
 		setWriteLoading(WriteStatus.Request);
 
 		writeWave(reaction, message)
@@ -76,7 +75,8 @@ export default function useWallet() {
 				setTotalWaves(await getTotalWaves());
 				setWriteLoading(WriteStatus.None);
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.error(error);
 				setWriteLoading(WriteStatus.None);
 			});
 	};
@@ -129,7 +129,7 @@ async function getTotalWaves() {
 	return totalWaves.toString();
 }
 
-function writeWave(reaction) {
+function writeWave(reaction, message) {
 	const provider = new ethers.providers.Web3Provider(window.ethereum);
 	const signer = provider.getSigner();
 	const wavePortalContract = new ethers.Contract(
@@ -138,5 +138,5 @@ function writeWave(reaction) {
 		signer,
 	);
 
-	return wavePortalContract.wave(reaction);
+	return wavePortalContract.wave(reaction, message);
 }
