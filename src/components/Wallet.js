@@ -37,7 +37,7 @@ export default function Wallet({
 						Wallet Connected
 					</div>
 					<div
-						class={classNames(
+						className={classNames(
 							"network",
 							isRinkeby ? "networkValid" : "networkInvalid",
 						)}

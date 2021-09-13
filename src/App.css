@@ -69,7 +69,7 @@
 
 .disabled {
 	opacity: 0.8;
-	filter: grayscale(0.5);
+	filter: grayscale(0.1);
 	cursor: not-allowed;
 }
 
