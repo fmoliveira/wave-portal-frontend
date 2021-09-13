@@ -1,12 +1,25 @@
 import React from "react";
 
+import TwitterIcon from "./TwitterIcon";
+
 export default function Header() {
 	return (
 		<div className="header">
-			<span role="img" aria-label="Wave">
-				👋
-			</span>
-			Wave at Filipe
+			<div>
+				<span role="img" aria-label="Wave">
+					👋
+				</span>
+				<h1>Wave at Filipe</h1>
+			</div>
+			<div>
+				<a
+					href="https://twitter.com/intent/user?screen_name=tfmoliveira"
+					aria-label="Follow me on Twitter"
+					title="Follow me on Twitter"
+				>
+					<TwitterIcon />
+				</a>
+			</div>
 		</div>
 	);
 }
