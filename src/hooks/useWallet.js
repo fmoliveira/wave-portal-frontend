@@ -183,6 +183,7 @@ async function getTotalWaves() {
 	);
 
 	const totalWaves = await wavePortalContract.getTotalWaves();
+	console.log({ totalWaves });
 	return Number.parseInt(totalWaves.toString(), 10);
 }
 
