@@ -6,7 +6,7 @@ Send me a hello through the blockchain!
 
 This is my project for the course [Build a Web3 App with Solidity + Ethereum Smart Contracts](https://buildspace.so/solidity) at [Buildspace](https://buildspace.so/).
 
-Check the backend code at https://github.com/fmoliveira/my-wave-portal
+Check the backend code at https://github.com/fmoliveira/wave-portal-backend
 
 ## Prerequisites
 
